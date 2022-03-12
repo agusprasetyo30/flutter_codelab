@@ -1,16 +1,14 @@
-# codelab_1
+# Codelab
 
-A new Flutter project.
+Kumpulan source code untuk Codelab Flutter Dicoding
 
 ## Getting Started
+- Codelab 1
+  https://github.com/agusprasetyo30/flutter_codelab/commits/1e74b72be1cd311fe64dc93f309604c4ec2ebb94
 
-This project is a starting point for a Flutter application.
+- Codelab 2
+  https://github.com/agusprasetyo30/flutter_codelab/tree/170fffb7bdd1318eb1ad59bf0800178b93668acd
+  
+- Codelab 3
+  `Coming soon`
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
