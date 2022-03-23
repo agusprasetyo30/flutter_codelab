@@ -8,7 +8,7 @@ Kumpulan source code untuk Codelab Flutter Dicoding
 
 - Codelab 2
   https://github.com/agusprasetyo30/flutter_codelab/tree/170fffb7bdd1318eb1ad59bf0800178b93668acd
-  
+
 - Codelab 3
-  `Coming soon`
+	`Coming soon`
 

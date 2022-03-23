@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:codelab_1/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:codelab_1/detail_screen.dart';
 
@@ -16,9 +17,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: DetailScreen(),
+          // primarySwatch: Colors.blue,
+          ),
+      home: MainScreen(),
     );
   }
 }

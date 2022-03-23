@@ -1,25 +1,54 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:codelab_1/model/tourism_place.dart';
 import 'package:flutter/material.dart';
 
 class DetailScreen extends StatelessWidget {
-  const DetailScreen({Key? key}) : super(key: key);
+  final TourismPlace place;
+
+  DetailScreen({required this.place});
 
   @override
   Widget build(BuildContext context) {
     var informationTextStyle = TextStyle(fontFamily: 'Oxygen');
-
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Image.asset('images/sedekah-laut.jpg'),
+              Stack(
+                children: <Widget>[
+                  Hero(
+                      tag: place.imageAsset,
+                      child: Image.asset(place.imageAsset)),
+                  // Image.asset(place.imageAsset),
+                  SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.grey,
+                            child: IconButton(
+                              icon: Icon(Icons.arrow_back, color: Colors.white),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ),
+                          FavoriteButton()
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               Container(
                   margin: EdgeInsets.only(top: 16.0),
                   child: Text(
-                    'Wisata Kabupaten Tuban',
+                    place.name,
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 30.0, fontFamily: 'Staatliches'),
                   )),
@@ -37,7 +66,7 @@ class DetailScreen extends StatelessWidget {
                         SizedBox(
                           width: 80,
                           child: Text(
-                            "Mben dino",
+                            place.openDays,
                             textAlign: TextAlign.center,
                             style: informationTextStyle,
                           ),
@@ -49,7 +78,7 @@ class DetailScreen extends StatelessWidget {
                         Icon(Icons.access_time),
                         SizedBox(height: 8.0),
                         Text(
-                          '00:00 - Bosen',
+                          place.openTime,
                           textAlign: TextAlign.center,
                           style: informationTextStyle,
                         )
@@ -60,7 +89,7 @@ class DetailScreen extends StatelessWidget {
                         Icon(Icons.monetization_on),
                         SizedBox(height: 8.0),
                         Text(
-                          'Seikhlasnya',
+                          place.ticketPrice,
                           textAlign: TextAlign.center,
                           style: informationTextStyle,
                         )
@@ -72,7 +101,7 @@ class DetailScreen extends StatelessWidget {
               Container(
                 padding: EdgeInsets.all(16.0),
                 child: Text(
-                  "Desa gesikharjo adalah sebuah desa yang sangat jauh dari kecamatan parengan tapi dekat dengan tuban kota. Desa Gesikharjo terdiri dari 3 Dusun dan 1 dukuh yaitu Dusun Rembes, Gesik, dan Gemulung dan satu dukuh yaitu dukuh karang kisan",
+                  place.description,
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 16.0),
                 ),
@@ -81,38 +110,45 @@ class DetailScreen extends StatelessWidget {
                 height: 150,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(25),
-                      child: Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Image.network(
-                            'https://storage.nu.or.id/storage/post/16_9/mid/1377919631.jpg'),
+                  children: place.imageUrls.map((url) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: Image.network(url),
                       ),
-                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(25),
-                      child: Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Image.network(
-                            'http://kabartuban.com/wp-content/uploads/2019/06/IMG_20190612_074320.jpg'),
-                      ),
-                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(25),
-                      child: Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Image.network(
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfQ0SF7nyyHElN6leSmJ7ZU35NYiIkznq_rg&usqp=CAU'),
-                      ),
-                    ),
-                  ],
+                    );
+                  }).toList(),
                 ),
               )
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class FavoriteButton extends StatefulWidget {
+  @override
+  State<FavoriteButton> createState() => _FavoriteButtonState();
+}
+
+class _FavoriteButtonState extends State<FavoriteButton> {
+  bool isFavorite = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(
+        isFavorite ? Icons.favorite : Icons.favorite_border,
+        color: Colors.red,
+      ),
+      onPressed: () {
+        setState(() {
+          isFavorite = !isFavorite;
+        });
+      },
     );
   }
 }
